@@ -104,7 +104,9 @@ The following tools are installed to aid in development and review.
 
 This will check gems for security issues.
 
-`bundle exec bundler audit --update`
+```
+bundle exec bundler audit --update
+```
 
 <br>
 
@@ -112,7 +114,9 @@ This will check gems for security issues.
 
 This will check gems for memory leaks.
 
-`bundle exec bundler leak --update`
+```
+bundle exec bundler leak --update
+```
 
 <br>
 
@@ -120,7 +124,9 @@ This will check gems for memory leaks.
 
 This will perform static code analysis for security risks.
 
-`bundle exec brakeman`
+```
+bundle exec brakeman
+```
 
 <br>
 
@@ -128,7 +134,9 @@ This will perform static code analysis for security risks.
 
 This will ensure you are following our coding standards.
 
-`bundle exec standardrb`
+```
+bundle exec standardrb
+```
 
 <br>
 
