@@ -59,12 +59,14 @@ Once you are in the container on the command line, this functions as it does wit
 First you will need to create, migrate and seed the database.
 
 ```
-bundle exec rake db:create bundle exec rake db:migrate bundle exec rake db:seed
+bundle exec rake db:create && bundle exec rake db:migrate && bundle exec rake db:seed
 ```
 
 You will then need to start the services. We use foreman to run all of the servcies needed for the rails application
 
-`foreman start`
+```
+foreman start
+```
 
 ** If you get an error about foreman not being installed, you can install it using `gem install foreman`
 
