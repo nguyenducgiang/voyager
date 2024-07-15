@@ -1,0 +1,87 @@
+%nav.bg-gray-800
+  .mx-auto.max-w-7xl.px-4.sm:px-6.lg:px-8
+    .flex.h-16.justify-between
+      .flex
+        .-ml-2.mr-2.flex.items-center.md:hidden
+          / Mobile menu button
+          %button.relative.inline-flex.items-center.justify-center.rounded-md.p-2.text-gray-400.hover:bg-gray-700.hover:text-white.focus:outline-none.focus:ring-2.focus:ring-inset.focus:ring-white{"aria-controls" => "mobile-menu", "aria-expanded" => "false", :type => "button"}
+            %span.absolute{:class => "-inset-0.5"}
+            %span.sr-only Open main menu
+            /
+              Icon when menu is closed.
+
+              Menu open: "hidden", Menu closed: "block"
+            %svg.block.h-6.w-6{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24"}
+              %path{:d => "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+            /
+              Icon when menu is open.
+
+              Menu open: "block", Menu closed: "hidden"
+            %svg.hidden.h-6.w-6{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24"}
+              %path{:d => "M6 18L18 6M6 6l12 12", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+        .flex.flex-shrink-0.items-center
+          %img.h-8.w-auto{:alt => "Your Company", :src => "https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"}/
+        .hidden.md:ml-6.md:flex.md:items-center.md:space-x-4
+          / Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white"
+          %a.rounded-md.bg-gray-900.px-3.py-2.text-sm.font-medium.text-white{"aria-current" => "page", :href => "#"} Dashboard
+          %a.rounded-md.px-3.py-2.text-sm.font-medium.text-gray-300.hover:bg-gray-700.hover:text-white{:href => "#"} Team
+          %a.rounded-md.px-3.py-2.text-sm.font-medium.text-gray-300.hover:bg-gray-700.hover:text-white{:href => "#"} Projects
+          %a.rounded-md.px-3.py-2.text-sm.font-medium.text-gray-300.hover:bg-gray-700.hover:text-white{:href => "#"} Calendar
+      .flex.items-center
+        .flex-shrink-0
+          %button.relative.inline-flex.items-center.rounded-md.bg-indigo-500.px-3.py-2.text-sm.font-semibold.text-white.shadow-sm.hover:bg-indigo-400.focus-visible:outline.focus-visible:outline-2.focus-visible:outline-offset-2.focus-visible:outline-indigo-500{:class => "gap-x-1.5", :type => "button"}
+            %svg.h-5.w-5{"aria-hidden" => "true", :class => "-ml-0.5", :fill => "currentColor", :viewbox => "0 0 20 20"}
+              %path{:d => "M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"}
+            New Job
+        .hidden.md:ml-4.md:flex.md:flex-shrink-0.md:items-center
+          %button.relative.rounded-full.bg-gray-800.p-1.text-gray-400.hover:text-white.focus:outline-none.focus:ring-2.focus:ring-white.focus:ring-offset-2.focus:ring-offset-gray-800{:type => "button"}
+            %span.absolute{:class => "-inset-1.5"}
+            %span.sr-only View notifications
+            %svg.h-6.w-6{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24"}
+              %path{:d => "M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+          / Profile dropdown
+          .relative.ml-3
+            %div
+              %button#user-menu-button.relative.flex.rounded-full.bg-gray-800.text-sm.focus:outline-none.focus:ring-2.focus:ring-white.focus:ring-offset-2.focus:ring-offset-gray-800{"aria-expanded" => "false", "aria-haspopup" => "true", :type => "button"}
+                %span.absolute{:class => "-inset-1.5"}
+                %span.sr-only Open user menu
+                %img.h-8.w-8.rounded-full{:alt => "", :src => "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"}/
+            /
+              Dropdown menu, show/hide based on menu state.
+
+              Entering: "transition ease-out duration-200"
+              From: "transform opacity-0 scale-95"
+              To: "transform opacity-100 scale-100"
+              Leaving: "transition ease-in duration-75"
+              From: "transform opacity-100 scale-100"
+              To: "transform opacity-0 scale-95"
+            .absolute.right-0.z-10.mt-2.w-48.origin-top-right.rounded-md.bg-white.py-1.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "user-menu-button", "aria-orientation" => "vertical", :role => "menu", :tabindex => "-1"}
+              / Active: "bg-gray-100", Not Active: ""
+              %a#user-menu-item-0.block.px-4.py-2.text-sm.text-gray-700{:href => "#", :role => "menuitem", :tabindex => "-1"} Your Profile
+              %a#user-menu-item-1.block.px-4.py-2.text-sm.text-gray-700{:href => "#", :role => "menuitem", :tabindex => "-1"} Settings
+              %a#user-menu-item-2.block.px-4.py-2.text-sm.text-gray-700{:href => "#", :role => "menuitem", :tabindex => "-1"} Sign out
+  / Mobile menu, show/hide based on menu state.
+  #mobile-menu.md:hidden
+    .space-y-1.px-2.pb-3.pt-2.sm:px-3
+      / Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white"
+      %a.block.rounded-md.bg-gray-900.px-3.py-2.text-base.font-medium.text-white{"aria-current" => "page", :href => "#"} Dashboard
+      %a.block.rounded-md.px-3.py-2.text-base.font-medium.text-gray-300.hover:bg-gray-700.hover:text-white{:href => "#"} Team
+      %a.block.rounded-md.px-3.py-2.text-base.font-medium.text-gray-300.hover:bg-gray-700.hover:text-white{:href => "#"} Projects
+      %a.block.rounded-md.px-3.py-2.text-base.font-medium.text-gray-300.hover:bg-gray-700.hover:text-white{:href => "#"} Calendar
+    .border-t.border-gray-700.pb-3.pt-4
+      .flex.items-center.px-5.sm:px-6
+        .flex-shrink-0
+          %img.h-10.w-10.rounded-full{:alt => "", :src => "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"}/
+        .ml-3
+          .text-base.font-medium.text-white Tom Cook
+          .text-sm.font-medium.text-gray-400 tom@example.com
+        %button.relative.ml-auto.flex-shrink-0.rounded-full.bg-gray-800.p-1.text-gray-400.hover:text-white.focus:outline-none.focus:ring-2.focus:ring-white.focus:ring-offset-2.focus:ring-offset-gray-800{:type => "button"}
+          %span.absolute{:class => "-inset-1.5"}
+          %span.sr-only View notifications
+          %svg.h-6.w-6{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24"}
+            %path{:d => "M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+      .mt-3.space-y-1.px-2.sm:px-3
+        %a.block.rounded-md.px-3.py-2.text-base.font-medium.text-gray-400.hover:bg-gray-700.hover:text-white{:href => "#"} Your Profile
+        %a.block.rounded-md.px-3.py-2.text-base.font-medium.text-gray-400.hover:bg-gray-700.hover:text-white{:href => "#"} Settings
+        %a.block.rounded-md.px-3.py-2.text-base.font-medium.text-gray-400.hover:bg-gray-700.hover:text-white{:href => "#"} Sign out
+

@@ -22,6 +22,9 @@ gem "tzinfo-data", platforms: %i[windows jruby]
 group :development, :test do
   gem "debug", platforms: %i[mri windows]
   gem "standardrb"
+  gem "rspec-rails", "~> 6.1.0"
+  gem "shoulda-matchers", "~> 6.0"
+  gem "factory_bot"
 
   gem "bundler-leak"
   gem "bundler-audit"

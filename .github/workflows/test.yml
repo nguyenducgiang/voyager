@@ -1,0 +1,32 @@
+name: Run Tests
+on: [push, pull_request]
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-20.04
+    container:
+      image: ruby:3.2.3
+    services:
+      postgresql:
+        image: postgres:14.5
+        env:
+          POSTGRES_USER: 'postgres'
+          POSTGRES_HOST_AUTH_METHOD: trust
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Setup dependencies
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Lint
+        run: RAILS_ENV=test bundle exec standardrb
+
+      - name: Setup DB
+        run: |
+          RAILS_ENV=test bundle exec rake db:create db:schema:load
+
+      - name: run tests
+        run: RAILS_ENV=test bundle exec rspec
