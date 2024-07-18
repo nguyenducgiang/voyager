@@ -1,0 +1,29 @@
+.w-full.px-4
+  .flex
+    .sm:flex-auto
+      %h1.text-base.font-semibold.leading-6.text-gray-900 My teams
+      %p.mt-2.text-sm.text-gray-700 A list of all teams that you've created or you're a member of.
+    .mt-4.sm:ml-16.sm:mt-0.sm:flex-none
+      = link_to "Add team", new_team_path, class: "block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+  .flex.mt-8
+    .block.w-full
+      - if current_user.all_teams.any?
+        %table.min-w-full.divide-y.divide-gray-300
+          %thead
+            %tr
+              %th.pl-4.pr-3.text-left.text-sm.font-semibold.text-gray-900.sm:pl-0{:class => "py-3.5", :scope => "col"} Name
+              %th.px-3.text-left.text-sm.font-semibold.text-gray-900{:class => "py-3.5", :scope => "col"} Role
+              %th.px-3.text-left.text-sm.font-semibold.text-gray-900{:class => "py-3.5", :scope => "col"} Actions
+              %th.relative.pl-3.pr-4.sm:pr-0{:class => "py-3.5", :scope => "col"}
+                %span.sr-only Edit
+          %tbody.divide-y.divide-gray-200
+            %tr
+              %td.whitespace-nowrap.py-4.pl-4.pr-3.text-sm.font-medium.text-gray-900.sm:pl-0 Lindsay Walton
+              %td.whitespace-nowrap.px-3.py-4.text-sm.text-gray-500 Front-end Developer
+              %td.whitespace-nowrap.px-3.py-4.text-sm.text-gray-500 Member
+              %td.relative.whitespace-nowrap.py-4.pl-3.pr-4.text-right.text-sm.font-medium.sm:pr-0
+                %a.text-indigo-600.hover:text-indigo-900{:href => "#"}
+                  Edit
+                  %span.sr-only , Lindsay Walton
+      - else
+        %p.text-sm.text-gray-700 You don't have any team yet! Create one.

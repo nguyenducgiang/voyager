@@ -23,26 +23,21 @@
           %img.h-8.w-auto{:alt => "Your Company", :src => "https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"}/
         .hidden.md:ml-6.md:flex.md:items-center.md:space-x-4
           / Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white"
-          %a.rounded-md.bg-gray-900.px-3.py-2.text-sm.font-medium.text-white{"aria-current" => "page", :href => "#"} Dashboard
-          %a.rounded-md.px-3.py-2.text-sm.font-medium.text-gray-300.hover:bg-gray-700.hover:text-white{:href => "#"} Team
-          %a.rounded-md.px-3.py-2.text-sm.font-medium.text-gray-300.hover:bg-gray-700.hover:text-white{:href => "#"} Projects
-          %a.rounded-md.px-3.py-2.text-sm.font-medium.text-gray-300.hover:bg-gray-700.hover:text-white{:href => "#"} Calendar
-      .flex.items-center
-        .flex-shrink-0
-          %button.relative.inline-flex.items-center.rounded-md.bg-indigo-500.px-3.py-2.text-sm.font-semibold.text-white.shadow-sm.hover:bg-indigo-400.focus-visible:outline.focus-visible:outline-2.focus-visible:outline-offset-2.focus-visible:outline-indigo-500{:class => "gap-x-1.5", :type => "button"}
-            %svg.h-5.w-5{"aria-hidden" => "true", :class => "-ml-0.5", :fill => "currentColor", :viewbox => "0 0 20 20"}
-              %path{:d => "M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"}
-            New Job
-        .hidden.md:ml-4.md:flex.md:flex-shrink-0.md:items-center
-          %button.relative.rounded-full.bg-gray-800.p-1.text-gray-400.hover:text-white.focus:outline-none.focus:ring-2.focus:ring-white.focus:ring-offset-2.focus:ring-offset-gray-800{:type => "button"}
-            %span.absolute{:class => "-inset-1.5"}
-            %span.sr-only View notifications
-            %svg.h-6.w-6{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24"}
-              %path{:d => "M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
-          / Profile dropdown
           .relative.ml-3
+            = link_to "My Teams", teams_path, class: "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white cursor-pointer"
+
+          - if current_user.own?(current_team)
+            %a.rounded-md.px-3.py-2.text-sm.font-medium.text-gray-300.hover:bg-gray-700.hover:text-white{:href => "#"}= current_team.name
+            %a.rounded-md.px-3.py-2.text-sm.font-medium.text-gray-300.hover:bg-gray-700.hover:text-white{:href => "#"} Memberships
+            %a.rounded-md.px-3.py-2.text-sm.font-medium.text-gray-300.hover:bg-gray-700.hover:text-white{:href => "#"} Roles
+          - elsif current_user.member_of?(current_team)
+
+      .flex.items-center
+        .hidden.md:ml-4.md:flex.md:flex-shrink-0.md:items-center
+          / Profile dropdown
+          .relative.ml-3(data-controller="dropdown")
             %div
-              %button#user-menu-button.relative.flex.rounded-full.bg-gray-800.text-sm.focus:outline-none.focus:ring-2.focus:ring-white.focus:ring-offset-2.focus:ring-offset-gray-800{"aria-expanded" => "false", "aria-haspopup" => "true", :type => "button"}
+              %button#user-menu-button.relative.flex.rounded-full.bg-gray-800.text-sm.focus:outline-none.focus:ring-2.focus:ring-white.focus:ring-offset-2.focus:ring-offset-gray-800{"aria-expanded" => "false", "aria-haspopup" => "true", :type => "button"}(data-action="dropdown#toggle click@window->dropdown#hide")
                 %span.absolute{:class => "-inset-1.5"}
                 %span.sr-only Open user menu
                 %img.h-8.w-8.rounded-full{:alt => "", :src => "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"}/
@@ -55,33 +50,7 @@
               Leaving: "transition ease-in duration-75"
               From: "transform opacity-100 scale-100"
               To: "transform opacity-0 scale-95"
-            .absolute.right-0.z-10.mt-2.w-48.origin-top-right.rounded-md.bg-white.py-1.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "user-menu-button", "aria-orientation" => "vertical", :role => "menu", :tabindex => "-1"}
+            .absolute.right-0.z-10.mt-2.w-48.origin-top-right.rounded-md.bg-white.py-1.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "user-menu-button", "aria-orientation" => "vertical", :role => "menu", :tabindex => "-1"}(data-dropdown-target="menu")
               / Active: "bg-gray-100", Not Active: ""
-              %a#user-menu-item-0.block.px-4.py-2.text-sm.text-gray-700{:href => "#", :role => "menuitem", :tabindex => "-1"} Your Profile
-              %a#user-menu-item-1.block.px-4.py-2.text-sm.text-gray-700{:href => "#", :role => "menuitem", :tabindex => "-1"} Settings
-              %a#user-menu-item-2.block.px-4.py-2.text-sm.text-gray-700{:href => "#", :role => "menuitem", :tabindex => "-1"} Sign out
-  / Mobile menu, show/hide based on menu state.
-  #mobile-menu.md:hidden
-    .space-y-1.px-2.pb-3.pt-2.sm:px-3
-      / Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white"
-      %a.block.rounded-md.bg-gray-900.px-3.py-2.text-base.font-medium.text-white{"aria-current" => "page", :href => "#"} Dashboard
-      %a.block.rounded-md.px-3.py-2.text-base.font-medium.text-gray-300.hover:bg-gray-700.hover:text-white{:href => "#"} Team
-      %a.block.rounded-md.px-3.py-2.text-base.font-medium.text-gray-300.hover:bg-gray-700.hover:text-white{:href => "#"} Projects
-      %a.block.rounded-md.px-3.py-2.text-base.font-medium.text-gray-300.hover:bg-gray-700.hover:text-white{:href => "#"} Calendar
-    .border-t.border-gray-700.pb-3.pt-4
-      .flex.items-center.px-5.sm:px-6
-        .flex-shrink-0
-          %img.h-10.w-10.rounded-full{:alt => "", :src => "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"}/
-        .ml-3
-          .text-base.font-medium.text-white Tom Cook
-          .text-sm.font-medium.text-gray-400 tom@example.com
-        %button.relative.ml-auto.flex-shrink-0.rounded-full.bg-gray-800.p-1.text-gray-400.hover:text-white.focus:outline-none.focus:ring-2.focus:ring-white.focus:ring-offset-2.focus:ring-offset-gray-800{:type => "button"}
-          %span.absolute{:class => "-inset-1.5"}
-          %span.sr-only View notifications
-          %svg.h-6.w-6{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24"}
-            %path{:d => "M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
-      .mt-3.space-y-1.px-2.sm:px-3
-        %a.block.rounded-md.px-3.py-2.text-base.font-medium.text-gray-400.hover:bg-gray-700.hover:text-white{:href => "#"} Your Profile
-        %a.block.rounded-md.px-3.py-2.text-base.font-medium.text-gray-400.hover:bg-gray-700.hover:text-white{:href => "#"} Settings
-        %a.block.rounded-md.px-3.py-2.text-base.font-medium.text-gray-400.hover:bg-gray-700.hover:text-white{:href => "#"} Sign out
-
+              %a#user-menu-item-1.block.px-4.py-2.text-sm.text-gray-700{:href => "#", :role => "menuitem", :tabindex => "-1"}(data-action="dropdown#toggle") Settings
+              = link_to "Sign out", destroy_user_session_path, data: {turbo_method: :delete}, class: "block px-4 py-2 text-sm text-gray-700", "data-action" => "dropdown#toggle"
