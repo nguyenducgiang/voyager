@@ -4,7 +4,9 @@ ruby "3.2.3"
 
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 
+gem "administrate"
 gem "bootsnap", require: false
+gem "devise"
 gem "haml-rails"
 gem "importmap-rails"
 gem "jbuilder"
@@ -20,6 +22,9 @@ gem "tzinfo-data", platforms: %i[windows jruby]
 group :development, :test do
   gem "debug", platforms: %i[mri windows]
   gem "standardrb"
+  gem "rspec-rails", "~> 6.1.0"
+  gem "shoulda-matchers", "~> 6.0"
+  gem "factory_bot"
 
   gem "bundler-leak"
   gem "bundler-audit"
